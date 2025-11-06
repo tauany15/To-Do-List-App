@@ -1,0 +1,39 @@
+{
+  "name": "to-do-list-app",
+  "version": "1.0.0",
+  "description": "A clean and modern to-do list application",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tauany15/To-Do-List-App.git"
+  },
+  "keywords": [
+    "todo",
+    "todolist",
+    "task-manager"
+  ],
+  "author": "Tauany",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/tauany15/To-Do-List-App/issues"
+  },
+  "homepage": "https://github.com/tauany15/To-Do-List-App#readme",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "mongoose": "^8.19.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

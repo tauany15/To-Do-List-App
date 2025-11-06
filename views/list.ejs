@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= listTitle %> - To-Do List</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="box">
+      <div id="heading">
+        <h1><%= listTitle %></h1>
+        
+        <!-- Progress Stats -->
+        <% if (stats.total > 0) { %>
+        <div class="stats">
+          <% var progressWidth = stats.percentage + '%'; %>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: <%= progressWidth %>"></div>
+          </div>
+          <p class="stats-text">
+            <%= stats.completed %> of <%= stats.total %> completed 
+            (<%= stats.percentage %>%)
+          </p>
+        </div>
+        <% } %>
+      </div>
+
+      <!-- Task List -->
+      <div class="items-container">
+        <% if (items.length === 0) { %>
+          <div class="empty-state">
+            <p>No tasks yet. Add one below!</p>
+          </div>
+        <% } else { %>
+          <% items.forEach(item => { %>
+            <div class="item <%= item.completed ? 'completed' : '' %>">
+              <!-- Toggle Completion -->
+              <form action="/toggle" method="POST" class="checkbox-form">
+                <input 
+                  type="checkbox" 
+                  name="completed" 
+                  value="<%= item.completed %>"
+                  <%= item.completed ? 'checked' : '' %>
+                  onchange="this.form.submit()"
+                >
+                <input type="hidden" name="itemId" value="<%= item._id %>">
+                <input type="hidden" name="listName" value="<%= listTitle %>">
+              </form>
+
+              <!-- Item Text -->
+              <p class="item-text" id="text-<%= item._id %>">
+                <%= item.name %>
+              </p>
+
+              <!-- Edit Form (hidden by default) -->
+              <form action="/update" method="POST" class="edit-form" id="edit-<%= item._id %>" style="display: none;">
+                <input 
+                  type="text" 
+                  name="itemName" 
+                  value="<%= item.name %>"
+                  class="edit-input"
+                  required
+                >
+                <input type="hidden" name="itemId" value="<%= item._id %>">
+                <input type="hidden" name="listName" value="<%= listTitle %>">
+                <button type="submit" class="save-btn">✓</button>
+                <button type="button" class="cancel-btn" onclick="cancelEdit('<%= item._id %>')">✕</button>
+              </form>
+
+              <!-- Action Buttons -->
+              <div class="item-actions">
+                <button class="edit-btn" onclick="editItem('<%= item._id %>')" title="Edit">
+                  ✎
+                </button>
+                
+                <form action="/delete" method="POST" class="delete-form">
+                  <input type="hidden" name="itemId" value="<%= item._id %>">
+                  <input type="hidden" name="listName" value="<%= listTitle %>">
+                  <button type="submit" class="delete-btn" title="Delete">✕</button>
+                </form>
+              </div>
+            </div>
+          <% }); %>
+        <% } %>
+      </div>
+
+      <!-- Add New Item Form -->
+      <form class="item add-item" action="/add" method="POST">
+        <input 
+          type="text" 
+          name="itemName" 
+          placeholder="New Item" 
+          autocomplete="off"
+          required
+        >
+        <input type="hidden" name="listName" value="<%= listTitle %>">
+        <button type="submit" name="button">+</button>
+      </form>
+    </div>
+
+    <!-- Navigation -->
+    <div class="navigation">
+      <a href="/" class="nav-link">Today</a>
+      <a href="/about" class="nav-link">About</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>© <%= new Date().getFullYear() %> To-Do List App</p>
+  </footer>
+
+  <script>
+    function editItem(itemId) {
+      document.getElementById('text-' + itemId).style.display = 'none';
+      document.getElementById('edit-' + itemId).style.display = 'flex';
+      document.getElementById('edit-' + itemId).querySelector('input[type="text"]').focus();
+    }
+
+    function cancelEdit(itemId) {
+      document.getElementById('text-' + itemId).style.display = 'block';
+      document.getElementById('edit-' + itemId).style.display = 'none';
+    }
+
+    // Prevent double submission
+    document.querySelectorAll('form').forEach(form => {
+      form.addEventListener('submit', function() {
+        form.querySelectorAll('button[type="submit"]').forEach(btn => {
+          btn.disabled = true;
+        });
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About - To-Do List</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    .about-content {
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 40px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .about-content h1 {
+      color: #A683E3;
+      margin-bottom: 20px;
+      font-size: 2rem;
+    }
+
+    .about-content h2 {
+      color: #333;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      font-size: 1.4rem;
+    }
+
+    .about-content p {
+      color: #666;
+      line-height: 1.8;
+      margin-bottom: 15px;
+      font-size: 1.05rem;
+    }
+
+    .about-content ul {
+      margin-left: 20px;
+      color: #666;
+      line-height: 1.8;
+    }
+
+    .about-content li {
+      margin-bottom: 10px;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 12px 24px;
+      background: #A683E3;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+
+    .back-link:hover {
+      background: #8B6FB8;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="about-content">
+      <h1>About To-Do List App</h1>
+      
+      <p>
+        A simple, elegant to-do list application to help you stay organized 
+        and productive. Built with Node.js, Express, and MongoDB.
+      </p>
+
+      <h2>Features</h2>
+      <ul>
+        <li>✓ Create and manage multiple task lists</li>
+        <li>✓ Mark tasks as complete/incomplete</li>
+        <li>✓ Edit existing tasks</li>
+        <li>✓ Delete tasks you no longer need</li>
+        <li>✓ Track your progress with visual statistics</li>
+        <li>✓ Responsive design for all devices</li>
+      </ul>
+
+      <h2>How to Use</h2>
+      <p>
+        <strong>Create a custom list:</strong> Simply navigate to 
+        <code>/your-list-name</code> in the URL (e.g., /Work, /Shopping).
+      </p>
+      <p>
+        <strong>Add tasks:</strong> Type your task in the input field and 
+        click the + button.
+      </p>
+      <p>
+        <strong>Complete tasks:</strong> Check the checkbox next to any task 
+        to mark it as complete.
+      </p>
+      <p>
+        <strong>Edit tasks:</strong> Click the edit icon (✎) to modify a task.
+      </p>
+      <p>
+        <strong>Delete tasks:</strong> Click the × button to remove a task.
+      </p>
+
+      <a href="/" class="back-link">← Back to To-Do List</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>© <%= new Date().getFullYear() %> To-Do List App</p>
+  </footer>
+</body>
+</html>
